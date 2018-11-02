@@ -1,0 +1,20 @@
+Cutting cloth. You are given a rectangular piece of cloth with dimensions X × Y , where X and
+Y are positive integers, and a list of n products that can be made using the cloth. For each
+product i 2 [1; n] you know that a rectangle of cloth of dimensions ai × bi is needed and that the
+final selling price of the product is ci. Assume the ai, bi, and ci are all positive integers. You
+have a machine that can cut any rectangular piece of cloth into two pieces either horizontally or
+vertically. Design an algorithm that determines the best return on the X × Y piece of cloth, that
+is, a strategy for cutting the cloth so that the products made from the resulting pieces give the
+maximum sum of selling prices. You are free to make as many copies of a given product as you
+wish, or none if desired.
+
+The input will be specified in a file as follows. The first line will be the
+integers X; Y , separated by whitespaces. The next line will be n. The next n lines will be ai; bi; ci in that order separated
+by whitespaces. For example, one input is:
+20 30
+4
+3 4 10
+4 5 9
+12 23 100
+3 3 2
+Your output should be the best return that you can get.
