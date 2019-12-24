@@ -75,7 +75,7 @@ class Solution:
             if customfunction.f(x, 1) > z:
                 return A
             a, b = 1, z
-            while a < z + 1:
+            while a <= b:
                 mid = (a + b) // 2
                 print(a, b)
                 print(mid)
@@ -85,8 +85,6 @@ class Solution:
                     a = mid+1
                 if customfunction.f(x, mid) == z:
                     A.append([x, mid])
-                    break
-                if a > b:
                     break
         return A
 
