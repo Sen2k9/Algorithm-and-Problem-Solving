@@ -42,34 +42,67 @@ Note:
 
 class Solution:
     def isCousins(self, root, x, y):
-        #g_depth = 0
-        #g_parent = 0
+        # Solution 1: recursive
 
-        def dfs(root, val, depth, parent):
-            if not root:
-                return
-            if root.val == val:
-                global g_depth
-                global g_parent
-                g_depth = depth
-                g_parent = parent
-                return
+        # def dfs(root, val, depth, parent):
+        #     if not root:
+        #         return
+        #     if root.val == val:
+        #         global g_depth
+        #         global g_parent
+        #         g_depth = depth
+        #         g_parent = parent
+        #         return
 
-            else:
-                dfs(root.left, val, depth + 1, root.val)
-                dfs(root.right, val, depth+1, root.val)
+        #     else:
+        #         dfs(root.left, val, depth + 1, root.val)
+        #         dfs(root.right, val, depth+1, root.val)
 
-        dfs(root, x, 0, 0)
-        x_depth = g_depth
-        x_parent = g_parent
-        dfs(root, y, 0, 0)
-        y_depth = g_depth
-        y_parent = g_parent
+        # dfs(root, x, 0, 0)
+        # x_depth = g_depth
+        # x_parent = g_parent
+        # dfs(root, y, 0, 0)
+        # y_depth = g_depth
+        # y_parent = g_parent
 
-        return x_depth == y_depth and x_parent != y_parent
+        # return x_depth == y_depth and x_parent != y_parent
+
+        # Solution 2: iterative
+
+        queue = []
+        x_depth = 0
+        y_depth = 0
+        depth = 0
+
+        queue.append(root)
+        while queue:
+            for _ in range(len(queue)):
+                node = queue.pop(0)
+                if node.left and node.right:
+                    if (node.left.val, node.right.val) == (x, y) or (node.left.val, node.right.val) == (y, x):
+                        return False
+
+                if node.val == x:
+                    x_depth = depth
+                elif node.val == y:
+                    y_depth = depth
+
+                if x_depth > 0 and y_depth > 0:
+                    break
+                if node.left:
+                    queue.append(node.left)
+                if node.right:
+                    queue.append(node.right)
+
+            depth += 1
+
+        return x_depth == y_depth
 
 
 """
+corner case:
+1. two values one under other (parent-child)
+2. both cousins have same parent at same depth
 reference:
 https://leetcode.com/problems/cousins-in-binary-tree/discuss/462369/Python-DFS-solution-beats-100-time-and-100-memory
 """
