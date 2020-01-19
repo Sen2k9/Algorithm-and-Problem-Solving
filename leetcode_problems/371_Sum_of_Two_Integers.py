@@ -37,5 +37,6 @@ print(sol.getSum(a, b))
 
 """
 reference:
+https://sciencing.com/convert-negative-numbers-binary-5124016.html
 https://leetcode.com/problems/sum-of-two-integers/discuss/293945/one-python-solution-with-bit-manipulation
 """
