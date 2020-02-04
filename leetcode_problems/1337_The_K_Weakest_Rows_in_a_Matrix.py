@@ -87,6 +87,11 @@ class Solution:
 
         return result
 
+        # Solution 3: simpler
+        count = [(row.count(1), i) for i, row in enumerate(mat)]
+        count.sort()
+        return([element[1] for element in count[:k]])
+
 
 sol = Solution()
 mat = [[1, 0, 0, 0],
