@@ -36,9 +36,9 @@ class Solution:
                     break
             else:
                 total_prime.append(val)
-        print(total_prime)
+        # print(total_prime)
         composite = n - len(total_prime)
-        print(composite)
+        # print(composite)
 
         return (math.factorial(len(total_prime))*math.factorial(composite)) % (10**9 + 7)
         # Solution: using Sieve technique for finding prime
