@@ -33,24 +33,36 @@ Constraints:
 
 class Solution:
     def closestDivisors(self, num: int):
-        import math
-        l = []
-        for i in range(1, int(math.ceil(math.sqrt(num))) + 2):
-            # print(i)
-            a = i
-            b = int(math.ceil(num / a))
+        # import math
+        # l = []
+        # for i in range(1, int(math.ceil(math.sqrt(num))) + 2):
+        #     # print(i)
+        #     a = i
+        #     b = int(math.ceil(num / a))
 
-            if a * b == num + 1 or a * b == num + 2:
-                l.append([a, b])
-            if a * a == num + 1 or a * a == num + 2:
-                l.append([a, a])
-        # print(l)
+        #     if a * b == num + 1 or a * b == num + 2:
+        #         l.append([a, b])
+        #     if a * a == num + 1 or a * a == num + 2:
+        #         l.append([a, a])
+        # # print(l)
 
-        l = sorted(l, key=lambda x: abs(x[0] - x[1]))
-        # print(l)
-        return l[0]
+        # l = sorted(l, key=lambda x: abs(x[0] - x[1]))
+        # # print(l)
+        # return l[0]
+
+        # Solution 2: fastest
+        for i in range(int((num+2) ** 0.5), 0, -1):
+            if (num + 1) % i == 0:
+                return [i, (num+1) // i]
+            if (num + 2) % i == 0:
+                return [i, (num+2) // i]
 
 
 sol = Solution()
-num = 10
+num = 2
 print(sol.closestDivisors(num))
+
+"""
+references:
+https://leetcode.com/problems/closest-divisors/discuss/517962/Greedy-beat-100-time-memory
+"""
