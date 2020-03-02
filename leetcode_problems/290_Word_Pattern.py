@@ -30,24 +30,41 @@ You may assume pattern contains only lowercase letters, and str contains lowerca
 
 
 class Solution:
-    def wordPattern(self, pattern: str, s: str):
+    def wordPattern(self, pattern: str, str: str):
         # Solution: self
-        # O(n)
-        # O(n)
-        from collections import Counter
-        p = Counter(pattern)
-        st = Counter(s.split())
-        patt = list(p)
-        string = list(st)
-        if len(patt) != len(string):
+        # Time O(n)
+        # Space O(n)
+
+        dic = {}
+
+        pattern_set = set()
+        word_set = set()
+        str = str.split()
+        if len(pattern) != len(str):  # test case : "aaa", "ab ab ab ab"
             return False
-        for i in range(len(patt)):
-            if p[patt[i]] != st[string[i]]:
-                return False
+        # print(str)
+
+        for i in range(len(pattern)):
+            # print(pattern[i])
+            if pattern[i] in dic:  # test case : "aabb" "dog cat cat dog"
+                #print(dic[pattern[i]], str[i])
+                if dic[pattern[i]] != str[i]:
+                    return False
+            # print(dic)
+            dic[pattern[i]] = str[i]
+            pattern_set.add(pattern[i])
+            word_set.add(str[i])
+
+            # print(dic)
+        if len(pattern_set) != len(word_set):  # test case : "abba" "dog dog dog dog"
+
+            return False
         return True
 
 
 sol = Solution()
-pattern = "abba"
-s = "dog cat cat fish"
+pattern = "abc"
+s = "b c a"
+
+
 print(sol.wordPattern(pattern, s))
