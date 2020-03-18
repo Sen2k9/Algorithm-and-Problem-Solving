@@ -1,7 +1,8 @@
 class TrieNode:
     def __init__(self):
-        self.children = [None] * 26
-        self.islastNode = False
+
+        self.children = {}
+        self.terminating = False
 
 
 class Trie:
@@ -14,58 +15,71 @@ class Trie:
     def getIndex(self, ch):
         return ord(ch) - ord("a")
 
-    def __insert__(self, key):
+    def insert(self, word):
+        root = self.root
+        for ch in word:
+            index = self.getIndex(ch)
+            if index not in root.children:
+                new_root = self.getNode()
+                root.children[index] = new_root
+            root = root.children[index]
 
-        current = self.root
+        root.terminating = True
+        #print(word, root.terminating)
 
-        for each in key:
-            index = self.getIndex(each)
+    def search(self, word):
+        root = self.root
 
-            if not current.children[index]:
-                current.children[index] = self.getNode()
-            current = current.children[index]
-
-        current.islastNode = True
-
-    def __search__(self, key):
-        current = self.root
-
-        for each in key:
-            index = self.getIndex(each)
-
-            if not current.children[index]:
+        for ch in word:
+            index = self.getIndex(ch)
+            if index not in root.children:
                 return False
+            root = root.children[index]
 
-            current = current.children[index]
+        #print(word, root.terminating)
+        if root.terminating:
+            return True
+        else:
+            return False
 
-        return current.islastNode and current != None
+    def delete(self, word):
+        root = self.root
+
+        for ch in word:
+            index = self.getIndex(ch)
+            if index not in root.children:
+                return False
+            root = root.children[index]
+
+        if root.terminating:
+            root.terminating = False
+            return True
+        else:
+            return False
+
+    def update(self, old_word, new_word):
+        if self.delete(old_word):
+
+            self.insert(new_word)
 
 
-# driver function
-def main():
+if __name__ == "__main__":
 
-    # Input keys (use only 'a' through 'z' and lower case)
-    keys = ["the", "a", "there", "anaswe", "any",
-            "by", "their"]
-    output = ["Not present in trie",
-              "Present in trie"]
+    strings = ["pqrs", "pprt", "psst", "qqrs", "pqrs"]
 
-    # Trie object
     t = Trie()
+    for word in strings:
+        t.insert(word)
 
-    # Construct trie
-    for key in keys:
-        t.__insert__(key)
+    print(t.search("pqrs"))
+    print(t.search("pprt"))
 
-    # Search for different keys
-    print("{} ---- {}".format("the", output[t.__search__("the")]))
-    print("{} ---- {}".format("these", output[t.__search__("these")]))
-    print("{} ---- {}".format("their", output[t.__search__("their")]))
-    print("{} ---- {}".format("thaw", output[t.__search__("thaw")]))
+    t.delete("pprt")
 
+    print(t.search("pprt"))
 
-if __name__ == '__main__':
-    main()
+    t.update("mnop", "pprt")
+    print(t.search("pqrt"))
 
 """
 references:
