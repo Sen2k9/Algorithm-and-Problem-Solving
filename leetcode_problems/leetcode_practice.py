@@ -1,3 +1,5 @@
+
+import sys
 import pdb
 
 
@@ -19,40 +21,38 @@ class Solution:
         return merge_inv
 
     def merge_sort(self, left, right, n):
-        arr=[0]*n
+        arr = [0]*n
         inversion = 0
-        k =0
-        i=0
-        j=0 
+        k = 0
+        i = 0
+        j = 0
         while i < len(left) and j < len(right):
             if left[i] <= right[j]:
                 arr[k] = left[i]
-                i +=1
-                k +=1
+                i += 1
+                k += 1
             else:
                 inversion += (len(left) - i)
                 arr[k] = right[j]
-                j +=1
-                k +=1
+                j += 1
+                k += 1
         while i < len(left):
-            arr [k] = left[i]
-            i +=1
-            k +=1
+            arr[k] = left[i]
+            i += 1
+            k += 1
 
         while j < len(right):
-            arr [k] = right[j]
-            j +=1
-            k +=1
+            arr[k] = right[j]
+            j += 1
+            k += 1
 
         return inversion
-
-
 
     # def isOneBitCharacter(self, bits):
     #     i = 0
     #     single = 0
     #     double = 0
-	
+
     #     while i< len(bits)-1:
     #         if bits[i] == 0:
     #             #single +=1
@@ -64,17 +64,15 @@ class Solution:
     #         return True
     #     else:
     #         return False
-				
-				
-                
-        
 
 
 sol = Solution()
-#pdb.set_trace()
+# pdb.set_trace()
 # bits = [0,1,1,0,0]
 # print(sol.isOneBitCharacter(bits))
 numbers = [1, 3, 5, 2, 4, 6]
 #target = 12
-pdb.set_trace()
-print(sol.merge_split(numbers))
+# pdb.set_trace()
+# print(sol.merge_split(numbers))
+
+print(sys.builtin_module_names)

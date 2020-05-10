@@ -30,7 +30,7 @@ Note:
 """
 
 
-class ListNode:
+class List:
     def __init__(self, key, val):
         self.key = key
         self.val = val
@@ -43,54 +43,76 @@ class MyHashSet:
         """
         Initialize your data structure here.
         """
-        self.size = 1000
-        self.m = [None]*self.size
+        self.size = 10000
+
+        self.arr = [None]*self.size
 
     def add(self, key: int):
+
         index = key % self.size
-        # If the node at given index is None then set it with given key
-        if self.m[index] == None:
-            self.m[index] = ListNode(key, True)
+
+        if not self.arr[index]:
+            self.arr[index] = List(key, True)
+
         else:
-            currNode = self.m[index]
-            # If there are nodes at given index then traverse the linked-list and attach the key at the end.
-            tempHead = currNode
-            self.m[index] = ListNode(key, True)
-            self.m[index].next = currNode
+            currHead = self.arr[index]
+
+            while currHead.next:
+
+                if currHead.key == key:
+                    currHead.val = True
+                    return
+
+                currHead = currHead.next
+
+            currHead.next = List(key, True)
 
     def remove(self, key: int):
         index = key % self.size
-        # If node at given index is None then do nothing.
-        if self.m[index] == None:
+
+        if not self.arr[index]:
             return
-        # Otherwise find given key in the linked-list at current index and set its value to False.
+
         else:
-            currNode = self.m[index]
-            while currNode:
-                if currNode.key == key:
-                    currNode.val = False
+
+            head = self.arr[index]
+
+            while head:
+                if head.key == key:
+                    head.val = False
                     break
-                currNode = currNode.next
+
+                head = head.next
 
     def contains(self, key: int):
         """
         Returns true if this set contains the specified element
         """
         index = key % self.size
-        # If there's no linked-list at given index then return False.
-        if self.m[index] == None:
+
+        if not self.arr[index]:
             return False
-        # Otherwise traverse the linked-list to check if the desired element is present and its value is True.
+
         else:
-            currNode = self.m[index]
-            while currNode:
-                if currNode.key == key:
-                    if currNode.val == True:
+            currHead = self.arr[index]
+
+            while currHead:
+                if currHead.key == key:
+                    if currHead.val == True:
                         return True
                     else:
                         return False
-                currNode = currNode.next
+
+                currHead = currHead.next
+
             return False
+
+
+# Your MyHashSet object will be instantiated and called as such:
+# obj = MyHashSet()
+# obj.add(key)
+# obj.remove(key)
+# param_3 = obj.contains(key)
 
 
 # Your MyHashSet object will be instantiated and called as such:
