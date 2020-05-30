@@ -6,45 +6,36 @@ class Node:
 
 class Solution:
     def removedups(self, head):
-        # seen = set()
-        # node = head
-        # while node and node.next:
-        #     seen.add(node.val)
+        # Solution 1 : using set
 
-        #     if node.next.val in seen:
-        #         node.next = node.next.next
-        #     node = node.next
-        # if node and node.val in seen:
-        #     node = None
-        # return head
-
-        # Solution 1: using previous node
-
-        prev = None
-        seen = set()
-
-        curr = head
-        while curr:
-
-            if curr.val in seen:
-                prev.next = curr.next
-
-            else:
-                seen.add(curr.val)
-                prev = curr
-            curr = curr.next
-        return head
-
-        # Solution 2: time: O(n^2), space: O(1)
-
+        # prev = None
         # curr = head
+        # unique = set()
 
-        # while curr:
-        #     runner = curr
-        #     while runner:
-        #         if runner.val == curr.val:
-        #             runner.next = runner.next.next
+        # while curr != None:
 
-        #         runner = runner.next
+        #     if curr.val in unique:
+        #         prev.next = curr.next
+
+        #     else:
+        #         unique.add(curr.val)
+        #         prev = curr
+
         #     curr = curr.next
+
         # return head
+
+        # Solution 2: O(1) space, O(n^2) runtime
+
+        slow = head
+
+        while slow != None:
+            fast = slow
+            while fast.next != None:
+                if fast.next.val == slow.val:
+                    fast.next = fast.next.next
+                fast = fast.next
+
+            slow = slow.next
+
+        return head
