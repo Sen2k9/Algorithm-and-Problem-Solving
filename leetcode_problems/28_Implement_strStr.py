@@ -61,22 +61,53 @@ class Solution:
 
         # Solution 4: using try-except block, clean code, O(1) memory
 
-        if needle == "":
+        # if needle == "":
+        #     return 0
+
+        # for i in range(len(haystack)):
+
+        #     try:
+        #         if haystack[i: i + len(needle)] == needle:
+        #             return i
+        #     except:
+        #         break
+        # return -1
+
+        # Solution 5: more efficient
+
+        if not needle:
             return 0
+        if not haystack or len(haystack) < len(needle):
+            return - 1
 
-        for i in range(len(haystack)):
+        ph = pn = l = 0
+        h = len(haystack)
+        n = len(needle)
 
-            try:
-                if haystack[i: i + len(needle)] == needle:
-                    return i
-            except:
-                break
+        while ph < h - n + 1:
+
+            while ph < h - n + 1 and haystack[ph] != needle[pn]:
+                ph += 1
+
+            while ph < h and pn < n and haystack[ph] == needle[pn]:
+                #print(ph, pn)
+
+                ph += 1
+                pn += 1
+                l += 1
+
+            if l == n:
+                return ph - l
+
+            ph = ph - l + 1
+            pn = l = 0
+
         return -1
 
 
 sol = Solution()
-haystack = "miss"
-needle = "issip"
+haystack = "m"
+needle = "m"
 print(sol.strStr(haystack, needle))
 
 """
