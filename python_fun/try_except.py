@@ -1,17 +1,14 @@
 
 def main():
-    try:
-        print('block-try start')
-        print(hello)
-        print('block-try end')
-    except:
-        print('block-except')
+    s = "abc"
+    hidden_name = iter(s)
 
-    else:
-        print('block-else')
-
-    finally:
-        print('block-finally')
+    while True:
+        try:
+            c = next(hidden_name)
+            print(c)
+        except StopIteration:
+            break
 
 
 main()
