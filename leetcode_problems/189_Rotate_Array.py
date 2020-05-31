@@ -31,19 +31,22 @@ class Solution:
         """
         Do not return anything, modify nums in-place instead.
         """
-        # if len(nums) < 2:
-        #     return nums
-        # for i in range(k):
-        #     b = nums.pop(len(nums)-1)
-        #     nums.insert(0, b)
 
-        # return nums
-        # Solution 2: More efficient
         k = k % len(nums)
-        # print(id(nums))
-        nums[:] = nums[-k:] + nums[:-k]
-        # print(id(nums))
+        if k == 0:
+            return
+
+        self.reverse(nums, 0, len(nums) - 1)
+        self.reverse(nums, 0, k - 1)
+        self.reverse(nums, k, len(nums) - 1)
         return nums
+
+    def reverse(self, nums, start, end):
+        while start < end:
+            nums[start], nums[end] = nums[end], nums[start]
+
+            start += 1
+            end -= 1
 
 
 sol = Solution()
