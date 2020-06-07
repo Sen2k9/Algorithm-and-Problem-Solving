@@ -50,3 +50,9 @@ print(sol.pop())
 
 print(sol.peek())
 print(sol.pop())
+
+
+"""
+time complexity : O(n), because I am only shifting each element onece.
+space comlexity : O(1), I am not using any other extra space except giving two stacks
+"""
