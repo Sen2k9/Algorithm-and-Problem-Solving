@@ -39,12 +39,24 @@
 # g(b=1)
 # g(a=1, 2, c=3)
 
-def min(x: float, y: float) -> float:
-    if x <= y:
-        return x
+# def min(x: float, y: float) -> float:
+#     if x <= y:
+#         return x
 
-    else:
-        return y
+#     else:
+#         return y
 
 
-print(min(3, 7))
+# print(min(3, 7))
+
+
+class Func:
+    def __init__(self):
+        self.test = 5
+
+    def letsTry(self, x: float) -> float:
+        return self.test
+
+
+sol = Func()
+print(sol.letsTry(3))
