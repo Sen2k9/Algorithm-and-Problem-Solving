@@ -106,6 +106,8 @@ class TestRoute(unittest.TestCase):
         self.assertEqual(route_between_nodes(graph, 1, 1), False)
 
 
+# it means if we run this script then the below code will execute
+# but if we import this module the below code will get skipped
 if __name__ == '__main__':
 
     unittest.main()
