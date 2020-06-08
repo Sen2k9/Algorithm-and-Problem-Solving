@@ -83,6 +83,8 @@ class TestBST(unittest.TestCase):
         self.assertEqual(inorderArr.inorder(root), input_arr)
 
 
+# it means if we run this script then the below code will execute
+# but if we import this module the below code will get skipped
 if __name__ == '__main__':
 
     unittest.main()
