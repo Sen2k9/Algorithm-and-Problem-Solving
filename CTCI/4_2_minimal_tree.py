@@ -54,7 +54,7 @@ class TreeSerializer:
     def __init__(self):
         self.ans = []
 
-    def inorder(self, root):
+    def inorder(self, root):  # time O(logn), space O(logn)
         if not root:
             return self.ans  # if an empty tree return empty array
 
