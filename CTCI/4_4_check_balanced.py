@@ -18,7 +18,7 @@ class BST:
     def __init__(self):
         pass
 
-    def makeTree(self, array):
+    def makeTree(self, array):  # O(n) time, O(logn) space
         if not array:
             return []
 
@@ -42,7 +42,7 @@ class Solution:
     def check_balanced_bst(self, root):
         return self.check_balanced(root) != -1
 
-    def check_balanced(self, root):
+    def check_balanced(self, root):  # O(n) time, O(h) space, where h is the height
 
         if not root:
             return 0
@@ -75,3 +75,13 @@ if __name__ == '__main__':
     root = bst.makeTree([])
 
     assert sol.check_balanced_bst(root) == True
+
+
+"""
+complexity analysis:
+runtime : O(n), as all nodes are traversed for operation
+space : O(logn) to create bst, O(h) where h is the height of the tree.
+
+space has been calculated based on the number of the recursive function calls.
+
+"""
