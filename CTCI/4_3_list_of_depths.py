@@ -19,7 +19,7 @@ class BinarySearchTree:
 
         return self.makeTree(array)
 
-    def makeTree(self, array):
+    def makeTree(self, array):  # time O(logn), space O(logn)
 
         if not array:
             return None
@@ -118,6 +118,6 @@ if __name__ == '__main__':
 """
 complexity analysis:
 
-Runtime : O(n)
-Space : O(n) for using an extra queue for bfs
+Runtime : O(n) for bfs, O(logn) for makeTree
+Space : O(n) for using an extra queue for bfs, O(logn) for makeTree
 """
