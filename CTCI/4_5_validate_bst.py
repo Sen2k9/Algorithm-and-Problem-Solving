@@ -38,10 +38,11 @@ class Solution:
     def __init__(self):
         pass
 
-    def validate_bst(self, root):
+    def validate_bst(self, root):  # best solution using max/min
 
         return self.helper(root, None, None)
 
+    # time O(n), O(logn), height = logn number of recursive calls
     def helper(self, root, minNode, maxNode):
         if not root:
             return True
@@ -51,12 +52,37 @@ class Solution:
 
         return self.helper(root.left, minNode, root.value) and self.helper(root.right, root.value, maxNode)
 
+    def validate_using_inorder(self, root):  # solution using inorder travarsal
+
+        return True if self.validate_bst_inorder(root) else False
+
+    # time O(n), space O(n), n number of recursive calls
+    def validate_bst_inorder(self, root):
+
+        if not root:
+            return -float('inf')
+
+        lastValueL = self.validate_bst_inorder(root.left)
+
+        if lastValueL > root.value:
+            return False
+
+        lastValue = root.value
+
+        lastValueR = self.validate_bst_inorder(root.right)
+
+        return max(lastValueL, lastValue, lastValueR)
+
 
 if __name__ == '__main__':
 
     bst = BST()
 
     sol = Solution()
+    root = bst.makeTree([1, 2, 3, 10, 4, 5, 6, 7])
+    # print(sol.validate_using_inorder(root))
+
+    assert sol.validate_using_inorder(root) == False
 
     root = bst.makeTree([1, 2, 3, 4, 5, 6, 7])
 
