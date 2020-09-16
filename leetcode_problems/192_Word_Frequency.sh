@@ -31,7 +31,9 @@ COMMENT
 
 # One Line Solution
 
-cat words.txt | tr -s ' ' '\n' | sort | uniq --count | sort -r | awk '{print $2 " " $1}'
+file=$1 # pass the path-to-filename as argument and assign it to file variable
+
+cat $file | tr -s ' ' '\n' | sort | uniq --count | sort -r | awk '{print $2 " " $1}'
 
 <<COMMENT
 
