@@ -1,4 +1,4 @@
-"""
+<<COMMENT
 Write a bash script to calculate the frequency of each word in a text file words.txt.
 
 For simplicity sake, you may assume:
@@ -27,23 +27,22 @@ Note:
     Could you write it in one-line using Unix pipes?
 
 
-"""
+COMMENT
 
 # One Line Solution
 
 cat words.txt | tr -s ' ' '\n' | sort | uniq --count | sort -r | awk '{print $2 " " $1}'
 
+<<COMMENT
 
-
-"""
 Explanation :
 
 As per the problem we need to read words.txt file and then process it. To practice it by hand, let's create a words.txt file giving our test strings.
 
 creating words.txt file
 
-echo 'the day is sunny the the
-the sunny is is' > words.txt
+echo "the day is sunny the the
+the sunny is is"> words.txt
 
 Now, we can see what is the output we are getting from each command joined by pipes
 
@@ -114,4 +113,4 @@ is 3
 sunny 2
 day 1
 
-"""
+COMMENT
