@@ -28,6 +28,11 @@ Constraints:
 
 class Solution:
     def canJump(self, nums) -> bool:
+
+        #brute-force approch with memorization
+        # time complexity O(n^2)
+        # space complexity O(n)
+
     #     self.memo = [0] * len(nums)
     #     self.memo[len(nums)-1] = 1
     #     return self.canJumpfrom(0, nums)
@@ -52,7 +57,9 @@ class Solution:
     #     self.memo[position] = -1
     #     return False
     
-        # optimal solution O(n), O(1)
+        # optimal solution 
+        # Time complexity : O(n)
+        # Space complexity: O(1)
 
         last_jump = len(nums) - 1
 
