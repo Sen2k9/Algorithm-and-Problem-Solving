@@ -23,21 +23,31 @@ Output: false
 
 class Solution:
     def increasingTriplet(self, nums) -> bool:
-        dp = [0] * len(nums)
-        for i in range(1, len(nums)):
-            for j in range(i):
-                if nums[i] > nums[j]:
-                    temp = dp[j] + 1
-                    dp[i] = max(dp[i], temp)
-
-                if dp[i] >= 3:
-                    return True
-                
-                print(dp, i, j, nums[i], nums[j])
-
-
+        # generalize solution
+        # Time: O(n*k)
+        # Space: O(k)
+        k = 3  # number of incresing sequence we need
+        seq_k = [float('Inf')] * (k - 1)
+        for each in nums:
+            for i in range(k-1):
+                if each <= seq_k[i]:
+                    seq_k[i] = each
+                    break
+            print(seq_k)
+            if each > seq_k[-1]:
+                return True
+        return False
 
 
 sol = Solution()
 nums = [1,2,3,4,5]
+print(sol.increasingTriplet(nums))
+
+nums = [5,4,3,2,1]
+print(sol.increasingTriplet(nums))
+
+nums = [1,1,-2,6]
+print(sol.increasingTriplet(nums))
+
+nums = [1,1,1,1]
 print(sol.increasingTriplet(nums))
