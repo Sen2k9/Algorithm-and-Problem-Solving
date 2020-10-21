@@ -25,45 +25,36 @@ Input: s = "catsandog", wordDict = ["cats", "dog", "sand", "and", "cat"]
 Output: false
 
 """
-
+from collections import deque
 
 class Solution:
     def wordBreak(self, s, wordDict):
-        temp = ""
-        for i in range(len(wordDict)):
-            temp = s
-            sp = temp.split(wordDict[i])
-            temp = temp.replace(wordDict[i], "")
+        # BFS algorithm
+        word_set = set(wordDict)
+        visited = [0] * len(s)
+        queue = deque()
+        queue.append(0)
+        while queue:
+            start = queue.popleft()
+            if visited[start] == 0:
+                for end in range(start + 1, len(s)+1):
+                    if s[start:end] in word_set:
+                        queue.append(end)
 
-            #s = "".join(s)
-            print(temp, sp)
-            if temp not in sp:
-                return False
+                        if end == len(s):
+                            return True
 
-            sp = temp
+                visited[start] = 1
 
-            for j in range(len(wordDict)):
-                if j == i:
-                    continue
-                sp = temp.split(wordDict[j])
-                temp = temp.replace(wordDict[j], "")
-                if temp not in sp:
-                    break
-                #print(temp, sp)
-                sp = temp
+            print(queue)
 
-                if not temp:
-
-                    return True
-            if not temp:
-                return True
-            #print(temp)
         return False
 
 
+
 sol = Solution()
-s = "ccaccc"
-w = ["cc", "ac"]
+s = "cbca"
+w = ["bc","ca"]
 
 print(sol.wordBreak(s, w))
 
