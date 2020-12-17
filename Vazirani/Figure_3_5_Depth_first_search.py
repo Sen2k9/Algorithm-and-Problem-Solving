@@ -15,6 +15,9 @@ class Solution:
     def __init__(self):
         self.vertices = []  # list of vertices
         self.edges = {}  # adjacency list
+        self.clock = 1
+        self.prev = []
+        self.post = []
 
     def dfs(self):
 
@@ -40,7 +43,9 @@ class Solution:
         self.postvisit(vertex)
 
     def previsit(self, vertex):
-        pass
+        self.prev[v] = self.clock
+        self.clock += 1
 
     def postvisit(self, vertex):
-        pass
+        self.post[v] = self.clock
+        self.clock += 1
