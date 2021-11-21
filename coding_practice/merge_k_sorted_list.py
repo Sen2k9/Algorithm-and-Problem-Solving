@@ -34,10 +34,6 @@ class ListNode:
     
     def __lt__(self, node):
         return self.value < node.value
-    
-    def __gt__(self, node):
-        return self.value > node.value
-
 
 import unittest
 
