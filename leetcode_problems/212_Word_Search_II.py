@@ -96,3 +96,17 @@ board = [["o","a","a","n"],["e","t","a","e"],["i","h","k","r"],["i","f","l","v"]
 words = ["oath","pea","eat","rain","hklf", "hf"]
 sol = Solution()
 print(sol.findWords(board, words))
+
+
+    def __init__(self, k: int, nums: List[int]):
+        self.heap = nums
+        self.k = k
+        heapify(self.heap)
+        
+
+    def add(self, val: int) -> int:
+        heappush(self.heap, val)
+        while len(self.heap) > self.k:
+            heappop(self.heap)
+        
+        return heappop(self.heap)
