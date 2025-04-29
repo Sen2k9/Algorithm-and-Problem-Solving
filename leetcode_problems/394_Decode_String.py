@@ -14,42 +14,52 @@ s = "3[a2[c]]", return "accaccacc".
 s = "2[abc]3[cd]ef", return "abcabccdcdcdef".
 
 """
-
+import unittest
 
 class Solution:
-    def decodeString(self, s: str):
-        if not s:
-            return ""
-
+    def decodeString(self, s: str) -> str:
         stack = []
+        for idx in range(len(s)):
 
-        for i in s:
-            if i.isdigit() or i.isalpha() or i == "[":
-                stack.append(i)
-
-            elif i == "]":
-                temp = ""
-
+            if s[idx] != "]":
+                stack.append(s[idx])
+            
+            else:
+                substr = ""
+                # capture all the words
                 while stack[-1] != "[":
-                    temp = stack.pop() + temp
-
-                time = ""
+                    substr = stack.pop() + substr
+                
+                # pop [
                 stack.pop()
 
-                # this loop is for numbers which may have more than one digits
+                k = ""
+                # capture all the digits
                 while stack and stack[-1].isdigit():
-                    time = stack.pop() + time
-
-                stack.append(temp * int(time))
-
-            print(stack)
-
+                    k = stack.pop() + k
+                
+                stack.append(int(k) * substr)
+        
         return "".join(stack)
 
 
-sol = Solution()
-s = "100[leetcode]"
-print(sol.decodeString(s))
+class TestSuite(unittest.TestCase):
+    
+    def test_decode_string(self):
+        sol = Solution()
+        s = "3[a]2[bc]"
+        self.assertEqual(
+            sol.decodeString(s),
+            "aaabcbc"
+        )
+        s = "3[a2[c]]"
+        self.assertEqual(
+            sol.decodeString(s),
+            "accaccacc"
+        )
+
+if __name__ == "__main__":
+    unittest.main()
 
 """
 references:
