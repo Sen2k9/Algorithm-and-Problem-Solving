@@ -43,6 +43,7 @@ Constraints:
 
 
 """
+import unittest
 
 class Solution:
     def convert(self, s: str, numRows: int) -> str:
@@ -74,3 +75,13 @@ class Solution:
                     second = first + numRows + (numRows - 2) - (2 * row)
         #print(answer)
         return "".join(answer)
+    
+class TestSuite(unittest.TestCase):
+    def test_palindrome(self):
+        sol = Solution()
+        self.assertEqual(sol.convert("PAYPALISHIRING", 3), "PAHNAPLSIIGYIR")
+        self.assertEqual(sol.convert("PAYPALISHIRING", 4), "PINALSIGYAHRPI")
+
+
+if __name__ == "__main__":
+    unittest.main()

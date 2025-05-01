@@ -47,32 +47,61 @@ Input: "MCMXCIV"
 Output: 1994
 Explanation: M = 1000, CM = 900, XC = 90 and IV = 4.
 """
-
+import unittest
 
 class Solution:
-    def romanToInt(self, s):
-        # Solution 1: self, fastest
-        dic = {"I": 1, "V": 5, "X": 10, "L": 50, "C": 100, "D": 500, "M": 1000}
-        total = 0
-        prev = s[0]
-        for curr in s:
-            print(prev)
-            if dic[prev] == dic[curr]:
-                total += dic[curr]
-            elif dic[curr] < dic[prev]:
-                total += dic[curr]
-                prev = curr
-            elif dic[curr] > dic[prev]:
-                total = total + dic[curr] - (2 * dic[prev])
-                # subtract the previous value twice which you already added in last iteration.
-                # e.g. for "IV" last iteration added value for "I" but for current iteration we will add value for "V" and also subtract value for "I" twice ,
-                # one is for penalty of adding "I" before and one is for making "5" to "4"
-                prev = curr
+    def romanToInt(self, s: str) -> int:
+        dictionary = {
+            "I": 1,
+            "V": 5,
+            "X": 10,
+            "L": 50,
+            "C": 100,
+            "D": 500,
+            "M": 1000,
+            "IV": 4,
+            "IX": 9,
+            "XL": 40,
+            "XC": 90,
+            "CD": 400,
+            "CM": 900
+        }
+        idx = 0
+        answer = 0
+        while idx < len(s):
+            if s[idx : idx + 2] in dictionary:
+                answer += dictionary[s[idx : idx + 2]]
+                idx = idx + 2
+            else:
+                answer += dictionary[s[idx]]
+                idx = idx + 1
+        
+        return answer
 
-            print(curr, total)
-        return total
+class TestSuite(unittest.TestCase):
+    
+    def test_romanToInt(self):
+        sol = Solution()
+        input = "III"
+        self.assertEqual(
+            sol.romanToInt(input),
+            3
+        )
+        input = "IV"
+        self.assertEqual(
+            sol.romanToInt(input),
+            4
+        )
+        input = "LVIII"
+        self.assertEqual(
+            sol.romanToInt(input),
+            58
+        )
+        input = "MCMXCIV"
+        self.assertEqual(
+            sol.romanToInt(input),
+            1994
+        )
 
-
-sol = Solution()
-s = "III"
-print(sol.romanToInt(s))
+if __name__ == "__main__":
+    unittest.main()
