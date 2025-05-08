@@ -82,6 +82,16 @@ class TestSuite(unittest.TestCase):
         nums = [-1,0,1,2,-1,-4]
         output = [[-1,-1,2],[-1,0,1]]
         self.assertEqual(
-            nums,
+            sol.threeSum(nums),
             output
         )
+        
+        nums = [0,1,1]
+        output = []
+        self.assertEqual(
+            sol.threeSum(nums),
+            output
+        )
+
+if __name__ == "__main__":
+    unittest.main()
