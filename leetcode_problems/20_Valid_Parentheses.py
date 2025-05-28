@@ -33,50 +33,46 @@ Example 5:
 Input: "{[]}"
 Output: true
 """
-
+import unittest
 
 class Solution:
-    def isValid(self, s: str):
-        # Solution 1: self
+    def isValid(self, s: str) -> bool:
+        match = {
+            ")": "(",
+            "}": "{",
+            "]": "["
+        }
         stack = []
-        # stack.append(s[0])
 
-        for each in s:
-            if not stack:
-                stack.append(each)
-            elif stack[-1] == "(" and each == ")":
+        for char in s:
+
+            if stack and stack[-1] == match.get(char, ""):
                 stack.pop()
-            elif stack[-1] == "{" and each == "}":
-                stack.pop()
-            elif stack[-1] == "[" and each == "]":
-                stack.pop()
+            
             else:
-                stack.append(each)
-
-        return len(stack) == 0
-        # Solution 2:
-        stack = []
-
-        for each in s:
-            if each in ["(", "{", "["]:
-                stack.append(each)
-            elif len(stack) == 0:
-                return False
-
-            elif each == ")" and stack.pop() != "(":
-                return False
-            elif each == "}" and stack.pop() != "{":
-                return False
-            elif each == "]" and stack.pop() != "[":
-                return False
-        return len(stack) == 0
+                stack.append(char)
+        
+        return True if not stack else False
 
 
-sol = Solution()
-s = ""
-print(sol.isValid(s))
-"""
-corner case:
-1. should check stack first and the coming string
-"]"
-"""
+class TestSuite(unittest.TestCase):
+    
+    def test_valid_parentheses(self):
+        sol = Solution()
+        
+        input = "()"
+        
+        self.assertEqual(
+            sol.isValid(input),
+            True
+        )
+        
+        input = "(]"
+        
+        self.assertEqual(
+            sol.isValid(input),
+            False
+        )
+
+if __name__ == "__main__":
+    unittest.main()
