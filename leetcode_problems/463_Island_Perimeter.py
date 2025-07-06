@@ -18,64 +18,61 @@ Output: 16
 Explanation: The perimeter is the 16 yellow stripes in the image below:
 
 """
-
+import unittest
+from typing import List
 
 class Solution:
-    def islandPerimeter(self, grid):
-        # solution 1: 
-        # dic = {1: 3, 2: 2, 3: 1, 0:4, 4:0} # for each count exposed edges
-        # total_edge = 0
-        # for i in range(len(grid)):
-        #     for j in range(len(grid[0])):
-                
-        #         if grid[i][j] == 1:
-        #             count = 0
+    def islandPerimeter(self, grid: List[List[int]]) -> int:
+        
+        ROWS = len(grid)
+        COLS = len(grid[0])
 
-        #             for x, y in [(1, 0), (0, 1), (-1, 0), (0, -1)]:
-        #                 nx = i + x
-        #                 ny = j + y
-        #                 if 0 <= nx and nx <= len(grid)-1 and 0 <= ny and ny <= len(grid[0])-1 and grid[nx][ny] == 1:
-        #                     count += 1
-                            
-        #             total_edge = total_edge + dic[count]
+        def dfs(r, c):
+            if r < 0 or r == ROWS or c < 0 or c == COLS or grid[r][c] == 0:
+                return 1
+            
+            if (r, c) in visit:
+                return 0
+            
+            visit.add((r, c))
+            # look into perimeter
 
-        # return total_edge
+            perimeter = dfs(r + 1, c)
+            perimeter += dfs(r - 1, c)
+            perimeter += dfs(r, c + 1)
+            perimeter += dfs(r, c - 1)
 
-        # Solution 2:
+            return perimeter
+        
+        visit = set()
+        perimeter = 0
+        for r in range(ROWS):
+            for c in range(COLS):
+                # only traverse from island
+                if grid[r][c] == 1:
+                    perimeter += dfs(r, c)
+        
+        return perimeter
 
-        total_edge = 0
-        for i in range(len(grid)):
-            for j in range(len(grid[0])):
-                if grid[i][j] == 1:
-                    if i == 0 or grid[i - 1][j] == 0: #top side
-                        total_edge += 1
-                    if j == 0 or grid[i][j - 1] == 0: # left side
-                        total_edge += 1
 
-                    if j== len(grid[0])-1 or grid[i][j + 1] == 0: # right side
-                        total_edge += 1
-                    if i == len(grid)-1 or grid[i + 1][j] == 0: # bottom side
-                        total_edge += 1
-                        
-        return total_edge
-                    
-                        
-sol = Solution()
-grid = [[0, 1, 0, 0],
-        [1, 1, 1, 0],
-        [0, 1, 0, 0],
-        [1, 1, 0, 0]]
+class TestSuit(unittest.TestCase):
+    
+    def test_islandPerimeter(self):               
+        sol = Solution()
+        grid = [[0, 1, 0, 0],
+                [1, 1, 1, 0],
+                [0, 1, 0, 0],
+                [1, 1, 0, 0]]
 
-print(sol.islandPerimeter(grid))
+        self.assertEqual(
+            sol.islandPerimeter(grid),
+            16
+        )
 
+if __name__ == "__main__":
+    unittest.main()
 
 """
-idea:
-if a land cell connected with another one land block, three edges exposed
-if a land cell connected with another two land block, two edges exposed
-if a land cell connected with another three land block, one edge exposed
-if a land cell not connected with any other land block, four edges exposed
-
 corner case:
 island can only be one single element
 [[1]]
