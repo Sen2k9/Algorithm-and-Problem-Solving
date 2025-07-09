@@ -1,0 +1,18 @@
+{% extends "sandbox/base.html" %}
+
+{% block content %}
+
+    {% if foods %}
+    <ul>
+        {% for food in foods %}
+        <li>
+            {{ food }}
+        </li>
+        {% endfor %}
+    </ul>
+    {% else %}
+        <p> No Food Found </p>
+    {% endif %}
+
+{% endblock content %}
+
