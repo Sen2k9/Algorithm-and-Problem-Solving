@@ -22,7 +22,8 @@ def minPlatform(arr, dep):
     
     arr = sorted(arr)
     dep = sorted(dep)
-    
+    # print(arr)
+    # print(dep)
     j = 0
     platform_cnt = 0
     res = 0
